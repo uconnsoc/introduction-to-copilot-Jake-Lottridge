@@ -28,7 +28,7 @@ def test_signup_adds_participant_to_activity():
     reset_activities()
 
     email = "teststudent@mergington.edu"
-    response = client.post("/activities/Chess%20Club/signup?email=%s" % email)
+    response = client.post(f"/activities/Chess%20Club/signup?email={email}")
 
     assert response.status_code == 200
     assert response.json()["message"] == f"Signed up {email} for Chess Club"
@@ -39,7 +39,7 @@ def test_signup_duplicate_participant_returns_400():
     reset_activities()
 
     email = "emma@mergington.edu"
-    response = client.post("/activities/Programming%20Class/signup?email=%s" % email)
+    response = client.post(f"/activities/Programming%20Class/signup?email={email}")
 
     assert response.status_code == 400
     assert response.json()["detail"] == "Student already signed up for this activity"
